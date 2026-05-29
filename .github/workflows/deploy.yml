@@ -25,8 +25,9 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -p 65002 ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-          
+          ssh-keyscan -p 65002 ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts || echo "ssh-keyscan failed"
+          cat ~/.ssh/known_hosts
+
       - name: Deploy via rsync
         run: |
           rsync -avz --delete -e "ssh -p 65002 -i ~/.ssh/id_ed25519" \
