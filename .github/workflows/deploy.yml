@@ -1,30 +1,17 @@
 name: Auren Deploy
 
 on:
-  workflow_run:
-    workflows: ["Auren CI"]    # must match the name in ci.yml exactly
-    types: [completed]
-    branches: [main]
-
+  workflow_call:        # ← called by CI, not triggered independently
+    
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-
     steps:
       - name: Download dist artifact
         uses: actions/download-artifact@v4
         with:
           name: dist
-          run-id: ${{ github.event.workflow_run.id }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           path: dist/
-
-      - name: Debug secrets
-        run: |
-            echo "SERVER is empty: ${{ secrets.FTP_SERVER == '' }}"
-            echo "USERNAME is empty: ${{ secrets.FTP_USERNAME == '' }}"
-            echo "PASSWORD is empty: ${{ secrets.FTP_PASSWORD == '' }}"
 
       - name: Deploy to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
