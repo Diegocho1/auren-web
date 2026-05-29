@@ -1,10 +1,14 @@
-name: Auren CI        # this name is what deploy.yml listens for
+name: Auren CI
 
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+
+permissions:        # ← THIS was missing
+  actions: write
+  contents: read
 
 jobs:
   build:

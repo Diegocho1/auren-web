@@ -20,16 +20,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path: dist/
 
-      - name: Debug secret presence
-        run: |
-            if [ -z "${{ secrets.FTP_SERVER }}" ]; then
-            echo "FTP_SERVER is EMPTY"
-            else
-            echo "FTP_SERVER is set (length: ${#FTP_SERVER})"
-            fi
-        env:
-            FTP_SERVER: ${{ secrets.FTP_SERVER }}      
-
       - name: Deploy to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
