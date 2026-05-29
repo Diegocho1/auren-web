@@ -1,0 +1,67 @@
+.nosotros {
+  padding: 100px 0;
+  background: var(--white);
+}
+
+.nosotros__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.nosotros__body {
+  color: var(--steel);
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-top: 16px;
+}
+
+.nosotros__valores {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.valor-card {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 28px;
+  border: 1px solid var(--smoke);
+  border-left: 3px solid var(--accent);
+  background: var(--white);
+  transition: box-shadow 0.25s, transform 0.2s;
+}
+.valor-card:hover {
+  box-shadow: 0 8px 32px rgba(10,22,40,0.08);
+  transform: translateX(4px);
+}
+
+.valor-card__icon {
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.valor-card__title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+.valor-card__desc {
+  font-size: 0.9rem;
+  color: var(--steel);
+  line-height: 1.6;
+}
+
+@media (max-width: 860px) {
+  .nosotros__inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}

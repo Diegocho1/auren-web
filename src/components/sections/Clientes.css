@@ -1,0 +1,91 @@
+.clientes {
+  padding: 100px 0;
+  background: var(--navy);
+  position: relative;
+}
+
+.clientes__header { margin-bottom: 60px; }
+.clientes .section-title { color: #fff; }
+
+.clientes__logos {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2px;
+  margin-bottom: 72px;
+}
+
+.cliente-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  min-height: 90px;
+  transition: background 0.2s;
+}
+.cliente-logo:hover { background: rgba(59,130,246,0.1); }
+.cliente-logo img { max-height: 40px; filter: brightness(0) invert(1); opacity: 0.7; }
+.cliente-logo__placeholder {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.clientes__testimonios {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.testimonio-card {
+  background: rgba(17,34,64,0.7);
+  border: 1px solid rgba(59,130,246,0.15);
+  border-left: 3px solid var(--accent);
+  padding: 36px;
+  position: relative;
+}
+
+.testimonio-card__quote {
+  font-size: 5rem;
+  line-height: 0.8;
+  color: var(--accent);
+  font-family: Georgia, serif;
+  opacity: 0.4;
+  margin-bottom: 12px;
+}
+
+.testimonio-card__texto {
+  font-size: 0.95rem;
+  color: var(--silver);
+  font-style: italic;
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+
+.testimonio-card__autor {
+  display: flex;
+  flex-direction: column;
+}
+.testimonio-card__autor strong {
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+}
+.testimonio-card__autor span {
+  font-size: 0.8rem;
+  color: var(--steel);
+  margin-top: 2px;
+}
+
+@media (max-width: 900px) {
+  .clientes__logos { grid-template-columns: repeat(3, 1fr); }
+  .clientes__testimonios { grid-template-columns: 1fr; }
+}
+@media (max-width: 500px) {
+  .clientes__logos { grid-template-columns: repeat(2, 1fr); }
+}
