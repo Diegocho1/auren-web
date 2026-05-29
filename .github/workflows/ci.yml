@@ -1,4 +1,4 @@
-name: Auren CI
+name: Auren CI        # this name is what deploy.yml listens for
 
 on:
   push:
@@ -24,3 +24,9 @@ jobs:
 
       - name: Build project
         run: npm run build
+
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
