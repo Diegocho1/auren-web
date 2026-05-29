@@ -20,6 +20,12 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path: dist/
 
+      - name: Debug secrets
+        run: |
+            echo "SERVER is empty: ${{ secrets.FTP_SERVER == '' }}"
+            echo "USERNAME is empty: ${{ secrets.FTP_USERNAME == '' }}"
+            echo "PASSWORD is empty: ${{ secrets.FTP_PASSWORD == '' }}"
+
       - name: Deploy to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
