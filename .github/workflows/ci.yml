@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [main]
 
-permissions:
+permissions:        # ← THIS was missing
   actions: write
   contents: read
 
@@ -34,9 +34,3 @@ jobs:
         with:
           name: dist
           path: dist/
-
-  deploy:
-    needs: build
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    uses: ./.github/workflows/deploy.yml
-    secrets: inherit

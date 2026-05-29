@@ -1,17 +1,23 @@
 name: Auren Deploy
 
 on:
-  workflow_call:
+  workflow_run:
+    workflows: ["Auren CI"]    # must match the name in ci.yml exactly
+    types: [completed]
+    branches: [main]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
       - name: Download dist artifact
         uses: actions/download-artifact@v4
         with:
           name: dist
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           path: dist/
 
       - name: Deploy to Hostinger via FTP
