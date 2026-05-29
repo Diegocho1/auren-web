@@ -1,11 +1,12 @@
 name: Auren Deploy
 
 on:
-  workflow_call:        # ← called by CI, not triggered independently
-    
+  workflow_call:
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Download dist artifact
         uses: actions/download-artifact@v4
@@ -14,7 +15,10 @@ jobs:
           path: dist/
 
       - name: Deploy to Hostinger via FTP
-        run: |
-          echo "SERVER empty: ${{ secrets.FTP_SERVER == '' }}"
-          echo "USERNAME empty: ${{ secrets.FTP_USERNAME == '' }}"
-          echo "PASSWORD empty: ${{ secrets.FTP_PASSWORD == '' }}"
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: dist/
+          server-dir: /public_html/
