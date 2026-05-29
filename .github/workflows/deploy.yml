@@ -14,10 +14,7 @@ jobs:
           path: dist/
 
       - name: Deploy to Hostinger via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: "test.example.com"        # ← hardcoded temporarily
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: dist/
-          server-dir: /public_html/
+        run: |
+          echo "SERVER empty: ${{ secrets.FTP_SERVER == '' }}"
+          echo "USERNAME empty: ${{ secrets.FTP_USERNAME == '' }}"
+          echo "PASSWORD empty: ${{ secrets.FTP_PASSWORD == '' }}"
