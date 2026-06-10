@@ -34,12 +34,3 @@ jobs:
         with:
           name: dist
           path: dist/
-
-      - name: Build Docker image
-        run: docker build -t my-app:${{ github.sha }} .
-
-      - name: Extract dist from container
-        run: |
-          docker create --name temp-container my-app:${{ github.sha }}
-          docker cp temp-container:/app/dist ./dist
-          docker rm temp-container
