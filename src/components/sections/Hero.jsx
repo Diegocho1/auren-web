@@ -12,7 +12,7 @@ export default function Hero() {
         <p className="section-label fade-up">Ingeniería Civil · Infraestructura</p>
         <h1 className="hero__title fade-up delay-1">
           Construimos el<br />
-          <span className="hero__title-accent">futuroooo</span> con<br />
+          <span className="hero__title-accent">futuro</span> con<br />
           precisión.
         </h1>
         <p className="hero__subtitle fade-up delay-2">

@@ -2,9 +2,9 @@ import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import './Contacto.css';
 
 const datos = [
-  { icon: <MapPin size={20} />,  label: 'Dirección',   valor: 'Durangoi, Dgo, México' },
-  { icon: <Phone size={20} />,   label: 'Teléfono',    valor: '+52 000 000 0000' },
-  { icon: <Mail size={20} />,    label: 'Correo',      valor: 'contacto@auren.com.mx' },
+  { icon: <MapPin size={20} />,  label: 'Dirección',   valor: 'Rayon 214, Cantarranas, Barrio de Tierra Blanca,Durango, Dgo, México' },
+  { icon: <Phone size={20} />,   label: 'Teléfono',    valor: '+52 (618) 132 5955' },
+  { icon: <Mail size={20} />,    label: 'Correo',      valor: 'contacto@aureninfraestructura.com.mx' },
   { icon: <Clock size={20} />,   label: 'Horario',     valor: 'Lunes a Viernes, 8:00 – 18:00' },
 ];
 
