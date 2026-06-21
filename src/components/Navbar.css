@@ -22,8 +22,9 @@
 .navbar__logo { display: flex; align-items: center; }
 .navbar__logo-placeholder {
   display: flex;
-  flex-direction: column;
-  line-height: 1;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
 }
 .navbar__logo-text {
   font-family: var(--font-display);
@@ -39,6 +40,12 @@
   color: var(--accent);
   letter-spacing: 0.22em;
   text-transform: uppercase;
+}
+
+.navbar__logo-img {
+  height: 36px;
+  width: auto;
+  display: block;
 }
 
 .navbar__links {
