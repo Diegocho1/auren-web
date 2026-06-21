@@ -9,7 +9,7 @@ export default function Hero() {
       <div className="hero__gradient" />
 
       <div className="container hero__content">
-        <p className="section-label fade-up">Ingeniería Civil · Infraestructura</p>
+        <p className="section-label fade-up">Ingeniería Civil · Infraestructura · Fraccionamientos · Estacionamientos · Desarrollos Urbanos</p>
         <h1 className="hero__title fade-up delay-1">
           Construimos el<br />
           <span className="hero__title-accent">futuro</span> con<br />
