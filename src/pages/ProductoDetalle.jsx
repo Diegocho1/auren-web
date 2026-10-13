@@ -19,8 +19,8 @@ export default function ProductoDetalle() {
           <p className="title-up">{producto.categoria}</p>
           <h2>{producto.nombre}</h2>
           <div className="section-fluid">
-            <input className="desc-btn" type="radio" id="desc-1" name="desc-btn" />
-            <label htmlFor="desc-1">Description</label>
+            <input className="desc-btn" type="radio" id="desc-1" />
+            <label htmlFor="desc-1">Descripción</label>
             <div className="section-fluid">
               <p>{producto.descripcion}</p>
             </div>
