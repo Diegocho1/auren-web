@@ -4,7 +4,7 @@ import SLT10 from "@/assets/productos/estaciones/SLT_10/slt_101.webp";
 import GNSS_RTK_EYR from "@/assets/productos/gps/GNSS_RTK_EYR/GNSS_RTK_EYR1.webp";
 import SL9 from "@/assets/productos/gps/SL_9/sl_91.webp";
 import PRISMA_SENCILLO from "@/assets/productos/niveles/PRISMA_SENCILLO/ps_1.png";
-import PRISMA_COMPLETO from "@/assets/productos/niveles/PRISMA_COMPLETO/pc_1.png";
+import PRISMA_COMPLETO from "@/assets/productos/niveles/PRISMA_COMPLETO/PC_1.png";
 import MINI_PRISMA from "@/assets/productos/niveles/MINI_PRISMA/mp_1.png";
 import SL7 from "@/assets/productos/gps/GNSS_RTK_SL7/sl_71.png";
 
