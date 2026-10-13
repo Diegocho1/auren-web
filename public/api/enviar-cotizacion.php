@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $data = json_decode(file_get_contents('php://input'), true) ?? [];
+$nombre = trim($data['nombre'] ?? '');
 
 // Honeypot: bots fill this hidden field, humans don't
 if (!empty($data['website'])) {
@@ -30,7 +31,7 @@ if ($nombre === '' || !preg_match('/^\d{10}$/', $telefono) || !filter_var($email
     exit;
 }
 
-$to   = 'cotizaciones@aureninfraestructura.com.mx'; // your hosting mailbox
+$to   = 'contacto@aureninfraestructura.com.mx'; // your hosting mailbox
 $from = 'no-reply@aureninfraestructura.com.mx';     // must be an address on your domain
 
 $subject = "Cotización de producto: $producto";

@@ -101,9 +101,10 @@ export default function CotizarModal({ producto, onClose }) {
               <p className="cotizar-modal__error">No se pudo enviar. Intenta de nuevo.</p>
             )}
 
-            <button className="cotizar-modal__btn" disabled={status === 'sending'} type='button'>
+            <button className="cotizar-modal__btn" disabled={status === 'sending'} type='submit'>
               {status === 'sending' ? 'Enviando…' : 'Solicitar cotización'}
             </button>
+            
           </form>
         )}
       </div>
