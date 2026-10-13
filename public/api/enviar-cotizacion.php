@@ -32,7 +32,7 @@ if ($nombre === '' || !preg_match('/^\d{10}$/', $telefono) || !filter_var($email
 }
 
 $to   = 'contacto@aureninfraestructura.com.mx'; // your hosting mailbox
-$from = 'no-reply@aureninfraestructura.com.mx';     // must be an address on your domain
+$from = 'contacto@aureninfraestructura.com.mx';     // must be an address on your domain
 
 $subject = "Cotización de producto: $producto";
 $body = "Nueva solicitud de cotización\n\n"
