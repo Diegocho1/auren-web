@@ -1,0 +1,256 @@
+.productos {
+    font-family: var(--font-display);
+}
+
+.productos__inner {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.products-header h1 {
+    margin: 0;
+    /* the default h1 margins can make it look misaligned */
+}
+
+.productos .search {
+    border-radius: 50rem;
+    padding: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: 25%;
+    background-color: #f3f3f3;
+}
+
+.productos .search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    cursor: pointer;
+    /* only if it's clickable */
+}
+
+.productos .search input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    font: inherit;
+}
+
+/* From Uiverse.io by adeladel522 */ 
+.button {
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  padding-block: 0.5rem;
+  padding-inline: 1.25rem;
+  background-color: rgb(0 107 179);
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #ffff;
+  gap: 10px;
+  font-weight: bold;
+  border: 3px solid #ffffff4d;
+  outline: none;
+  overflow: hidden;
+  font-size: 15px;
+  margin-top: 20px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  transition: all 0.3s ease-in-out;
+}
+
+.button:hover {
+  transform: scale(1.05);
+  border-color: #fff9;
+}
+
+.button:hover .icon {
+  transform: translate(4px);
+}
+
+.button:hover::before {
+  animation: shine 1.5s ease-out infinite;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100%;
+  background-image: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0) 70%
+  );
+  top: 0;
+  left: -100px;
+  opacity: 0.6;
+}
+
+@keyframes shine {
+  0% {
+    left: -100px;
+  }
+
+  60% {
+    left: 100%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+.productos .categories {
+    margin: 40px 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.productos .category-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 15px;
+    border-radius: 50rem;
+    border: 1px solid #000;
+    cursor: pointer;
+    margin: 0 10px;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s;
+    line-height: 1;
+}
+
+.productos .category-badge svg {
+    flex-shrink: 0;
+}
+
+.productos .category-badge:has(input:checked) {
+    background-color: var(--gray-light);
+    border: none;
+}
+
+.productos .category-badge:nth-of-type(1) {
+    margin-left: 0;
+}
+
+.productos .category-badge>input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 300px;
+    display: block;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.productos main {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-bottom: 40px;
+}
+
+.productos .shoe-card {
+    width: 100%;
+    cursor: pointer;
+}
+
+.productos .shoe-img {
+    aspect-ratio: 1 / 1;    
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.productos .shoe-img:hover>img {
+    transform: scale(1.1);
+}
+
+.productos .shoe-img>img {
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.productos .shoe-img>.heart:hover {
+    color: #eb7a7a;
+    border-color: #ffd7d7;
+}
+
+
+
+.productos .shoe-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.productos .shoe-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.productos .shoe-subtitle {
+    color: var(--gray-dark);
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.productos .shoe-price {
+    font-size: 1.1rem;
+}
+
+.productos h1 {
+    margin-top: 40px;
+    font-size: 3.5rem;
+    font-weight: 900;
+}
+
+.productos .content {
+    display: grid;
+}
+
+
+@media(max-width:768px) {
+    .category-badge {
+        margin: 5px 10px 5px 0;
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content {
+        display: flex;
+        justify-content: center;
+    }
+
+    .productos .search {
+        width: 100%;
+    }
+}

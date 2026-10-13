@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import logo from "@/assets/aurenLogo.jpeg";
+import logo from "@/assets/hero/logo_prueba.svg";
 import './Navbar.css';
+import { Link } from 'react-router-dom'
+
 
 const links = [
-  { label: 'Nosotros', href: '#nosotros' },
-  { label: 'Servicios', href: '#servicios' },
-  { label: 'Proyectos', href: '#proyectos' },
-  { label: 'Clientes', href: '#clientes' },
-  { label: 'Contacto', href: '#contacto' },
+  { label: 'Nosotros', href: '/#nosotros' },
+  { label: 'Servicios', href: '/#servicios' },
+  // { label: 'Proyectos', href: '/#proyectos' },
+  // { label: 'Clientes', href: '/#clientes' },
+  { label: 'Contacto', href: '/#contacto' },
+  { label: 'Productos', to: '/productos' },
+
 ];
 
 export default function Navbar() {
@@ -24,7 +28,7 @@ export default function Navbar() {
     <header className={`navbar ${scrolled ? 'navbar--solid' : ''}`}>
       <div className="container navbar__inner">
         {/* Logo */}
-        <a href="#hero" className="navbar__logo">
+        <a href="/#" className="navbar__logo">
           <div className="navbar__logo-placeholder">
             <img src={logo} alt="Auren Infraestructura" className="navbar__logo-img" />
             <span className="navbar__logo-text">AUREN</span>
@@ -34,10 +38,14 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <nav className="navbar__links">
-          {links.map(l => (
-            <a key={l.label} href={l.href} className="navbar__link">{l.label}</a>
-          ))}
-          <a href="#cotizar" className="btn-primary navbar__cta">Cotizar</a>
+          {links.map(l =>
+            l.to ? (
+              <Link key={l.label} to={l.to} className="navbar__link">{l.label}</Link>
+            ) : (
+              <a key={l.label} href={l.href} className="navbar__link">{l.label}</a>
+            )
+          )}
+          <a href="/#cotizar" className="btn-primary navbar__cta">Cotizar</a>
         </nav>
 
         {/* Mobile toggle */}

@@ -7,6 +7,13 @@ export default defineConfig({
   server: {
     port: 4200,
     strictPort: true, // falla si el puerto está ocupado, no busca otro
+    proxy: {
+      '/api': {
+        target: 'https://aureninfraestructura.com.mx',
+        changeOrigin: true,
+        secure: true,
+      },
+    },
   },
   resolve: {
     alias: {
