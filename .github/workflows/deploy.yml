@@ -36,4 +36,4 @@ jobs:
       - name: Verify deployment
         run: |
           ssh -p 65002 -i ~/.ssh/id_ed25519 ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} \
-            "echo '=== public_html contents ===' && ls -la ~/public_html/ && echo '=== Last modified ===' && ls -lt ~/public_html/ | head -5"
+            "echo '=== public_html contents ===' && ls -la ~/domains/aureninfraestructura.com.mx/public_html/ && echo '=== .htaccess ===' && cat ~/domains/aureninfraestructura.com.mx/public_html/.htaccess"
