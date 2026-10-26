@@ -1,11 +1,7 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
-
-  # Don't rewrite real files or directories (assets, images, etc.)
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-
-  # Everything else goes to the React app
   RewriteRule ^ /index.html [L]
 </IfModule>
