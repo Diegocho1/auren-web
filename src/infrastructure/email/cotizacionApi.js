@@ -7,3 +7,13 @@ export async function enviarCotizacion(payload) {
   const data = await res.json().catch(() => ({}));
   if (!res.ok || !data.ok) throw new Error(data.error || 'No se pudo enviar');
 }
+
+export async function enviarSolicitud(payload) {
+  const res = await fetch('/api/enviar-solicitud.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok || !data.ok) throw new Error(data.error || 'No se pudo enviar');
+}

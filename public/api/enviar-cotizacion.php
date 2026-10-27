@@ -8,7 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $data = json_decode(file_get_contents('php://input'), true) ?? [];
-$nombre = trim($data['nombre'] ?? '');
 
 // Honeypot: bots fill this hidden field, humans don't
 if (!empty($data['website'])) {
@@ -19,28 +18,39 @@ if (!empty($data['website'])) {
 // Strip tags and line breaks to prevent header injection
 $clean = fn($v) => trim(str_replace(["\r", "\n"], ' ', strip_tags((string)($v ?? ''))));
 
-$nombre   = $clean($data['nombre'] ?? '');
-$email    = $clean($data['email'] ?? '');
-$telefono = $clean($data['telefono'] ?? '');
-$producto = $clean($data['producto'] ?? '');
-$mensaje  = trim(strip_tags((string)($data['mensaje'] ?? '')));
+$nombre      = $clean($data['nombre'] ?? '');
+$empresa     = $clean($data['empresa'] ?? '');
+$email       = $clean($data['email'] ?? '');
+$servicio    = $clean($data['servicio'] ?? '');
+$descripcion = trim(strip_tags((string)($data['descripcion'] ?? '')));
 
-if ($nombre === '' || !preg_match('/^\d{10}$/', $telefono) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+// Teléfono is optional here: accept "+52 618 123 4567" style input, normalize to 10 digits
+$telefono = preg_replace('/\D/', '', (string)($data['telefono'] ?? ''));
+if (strlen($telefono) === 12 && strpos($telefono, '52') === 0) {
+    $telefono = substr($telefono, 2);
+}
+
+if (
+    $nombre === '' || $servicio === '' || $descripcion === '' ||
+    !filter_var($email, FILTER_VALIDATE_EMAIL) ||
+    ($telefono !== '' && !preg_match('/^\d{10}$/', $telefono))
+) {
     http_response_code(422);
     echo json_encode(['ok' => false, 'error' => 'Revisa los campos obligatorios']);
     exit;
 }
 
-$to   = 'contacto@aureninfraestructura.com.mx'; // your hosting mailbox
-$from = 'contacto@aureninfraestructura.com.mx';     // must be an address on your domain
+$to   = 'contacto@aureninfraestructura.com.mx';
+$from = 'contacto@aureninfraestructura.com.mx'; // must be an address on your domain
 
-$subject = "Cotización de producto: $producto";
-$body = "Nueva solicitud de cotización\n\n"
-      . "Producto: $producto\n"
+$subject = "Solicitud de cotización de servicio: $servicio";
+$body = "Nueva solicitud de cotización de servicio\n\n"
+      . "Servicio: $servicio\n"
       . "Nombre: $nombre\n"
+      . "Empresa: " . ($empresa !== '' ? $empresa : '(no indicada)') . "\n"
       . "Email: $email\n"
-      . "Teléfono: $telefono\n\n"
-      . "Mensaje:\n" . ($mensaje !== '' ? $mensaje : '(sin mensaje)') . "\n";
+      . "Teléfono: " . ($telefono !== '' ? $telefono : '(no indicado)') . "\n\n"
+      . "Descripción del proyecto:\n$descripcion\n";
 
 $headers = [
     "From: Auren Web <$from>",

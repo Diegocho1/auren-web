@@ -1,23 +1,36 @@
 import { useState } from 'react';
 import { Send } from 'lucide-react';
 import './Cotizar.css';
+import { enviarSolicitud } from '@/infrastructure/email/cotizacionApi';
 
 const serviciosOpc = [
   'Construcción', 'Proyecto ejecutivo', 'Supervisión de obra',
   'Topografía', 'Mantenimiento', 'Gestión de proyectos', 'Otro',
 ];
 
+const initialForm = {
+  nombre: '', empresa: '', email: '', telefono: '',
+  servicio: '', descripcion: '', website: '', // website = honeypot
+};
+
 export default function Cotizar() {
-  const [form, setForm] = useState({
-    nombre: '', empresa: '', email: '', telefono: '',
-    servicio: '', descripcion: '', presupuesto: '',
-  });
+  const [form, setForm] = useState(initialForm);
+  const [status, setStatus] = useState('idle'); // idle | sending | success | error
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
-  const handleSubmit = e => {
+
+  const handleSubmit = async e => {
     e.preventDefault();
-    // TODO: Conectar con backend o servicio de email
-    alert('Solicitud enviada. Nos pondremos en contacto pronto.');
+    setStatus('sending');
+    try {
+      await enviarSolicitud(form);
+      setStatus('success');
+      setForm(initialForm);
+    } catch (err) {
+      setErrorMsg(err.message);
+      setStatus('error');
+    }
   };
 
   return (
@@ -49,7 +62,7 @@ export default function Cotizar() {
               <input name="nombre" value={form.nombre} onChange={handleChange} placeholder="Tu nombre" required />
             </div>
             <div className="form-group">
-              <label>Empresa</label>
+              <label>Empresa (opcional)</label>
               <input name="empresa" value={form.empresa} onChange={handleChange} placeholder="Nombre de empresa" />
             </div>
           </div>
@@ -75,19 +88,24 @@ export default function Cotizar() {
             <textarea name="descripcion" value={form.descripcion} onChange={handleChange}
               placeholder="Describe brevemente el proyecto, ubicación, alcance esperado..." rows={5} required />
           </div>
-          <div className="form-group">
-            <label>Presupuesto estimado</label>
-            <select name="presupuesto" value={form.presupuesto} onChange={handleChange}>
-              <option value="">Selecciona un rango (opcional)</option>
-              <option>Menos de $500,000</option>
-              <option>$500,000 – $2,000,000</option>
-              <option>$2,000,000 – $10,000,000</option>
-              <option>Más de $10,000,000</option>
-            </select>
-          </div>
-          <button type="submit" className="btn-primary" style={{width:'100%', justifyContent:'center'}}>
-            Enviar solicitud <Send size={16} />
+
+          <input
+            name="website" value={form.website} onChange={handleChange}
+            tabIndex={-1} autoComplete="off" aria-hidden="true"
+            style={{ position: 'absolute', left: '-9999px' }}
+          />
+
+          <button type="submit" className="btn-primary" disabled={status === 'sending'}
+            style={{ width: '100%', justifyContent: 'center' }}>
+            {status === 'sending' ? 'Enviando...' : <>Enviar solicitud <Send size={16} /></>}
           </button>
+
+          {status === 'success' && (
+            <p className="form-msg form-msg--ok">Solicitud enviada. Nos pondremos en contacto pronto.</p>
+          )}
+          {status === 'error' && (
+            <p className="form-msg form-msg--error">{errorMsg || 'No se pudo enviar. Intenta de nuevo.'}</p>
+          )}
         </form>
       </div>
     </section>
