@@ -3,11 +3,15 @@ import { productosArray } from "@/components/sections/productos/Productos.js";
 import './ProductoDetalle.css';
 import Navbar from '@/components/Navbar';
 import './index.css';
+import CotizarModal from '@/components/CotizarModal.jsx';
+import { useState } from 'react';
 
 
 export default function ProductoDetalle() {
   const { slug } = useParams();
   const producto = productosArray.find((p) => p.slug === slug);
+  const [productoCotizar, setProductoCotizar] = useState(null);
+
 
   if (!producto) return <p>Producto no encontrado</p>;
 
@@ -35,9 +39,19 @@ export default function ProductoDetalle() {
           </div>
 
           <div className="info-wrap">
-            <button className="btn">Cotizar</button>
+            <button
+              type="button"
+              className="btn"
+              onClick={() => setProductoCotizar(true)}
+            >
+              <span className="shoe-price">Cotizar</span>
+            </button>
           </div>
 
+          <CotizarModal
+            producto={productoCotizar ? producto : null}
+            onClose={() => setProductoCotizar(false)}
+          />
           <div className="back-color"></div>
         </div>
       </div>
