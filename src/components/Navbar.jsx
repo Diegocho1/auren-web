@@ -57,12 +57,28 @@ export default function Navbar() {
       {/* Mobile menu */}
       {open && (
         <div className="navbar__mobile">
-          {links.map(l => (
-            <a key={l.label} href={l.href} className="navbar__mobile-link" onClick={() => setOpen(false)}>
-              {l.label}
-            </a>
-          ))}
-          <a href="#cotizar" className="btn-primary" style={{ marginTop: '12px' }} onClick={() => setOpen(false)}>
+          {links.map(l =>
+            l.to ? (
+              <Link
+                key={l.label}
+                to={l.to}
+                className="navbar__mobile-link"
+                onClick={() => setOpen(false)}
+              >
+                {l.label}
+              </Link>
+            ) : (
+              <a
+                key={l.label}
+                href={l.href}
+                className="navbar__mobile-link"
+                onClick={() => setOpen(false)}
+              >
+                {l.label}
+              </a>
+            )
+          )}
+          <a href="/#cotizar" className="btn-primary" style={{ marginTop: '12px' }} onClick={() => setOpen(false)}>
             Cotizar
           </a>
         </div>
