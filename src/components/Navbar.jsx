@@ -4,18 +4,16 @@ import logo from "@/assets/hero/logo_prueba.svg";
 import './Navbar.css';
 import { Link } from 'react-router-dom'
 
-
 const links = [
   { label: 'Nosotros', href: '/#nosotros' },
   { label: 'Servicios', href: '/#servicios' },
-  // { label: 'Proyectos', href: '/#proyectos' },
-  // { label: 'Clientes', href: '/#clientes' },
   { label: 'Contacto', href: '/#contacto' },
   { label: 'Productos', to: '/productos' },
-
 ];
 
-export default function Navbar() {
+// onCotizar (optional): if provided, "Cotizar" opens that action (e.g. the modal)
+// as a regular nav link instead of the big CTA that goes to the home form.
+export default function Navbar({ onCotizar }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -24,6 +22,7 @@ export default function Navbar() {
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
   return (
     <header className={`navbar ${scrolled ? 'navbar--solid' : ''}`}>
       <div className="container navbar__inner">
@@ -45,7 +44,14 @@ export default function Navbar() {
               <a key={l.label} href={l.href} className="navbar__link">{l.label}</a>
             )
           )}
-          <a href="/#cotizar" className="btn-primary navbar__cta">Cotizar</a>
+
+          {onCotizar ? (
+            <button type="button" className="navbar__link navbar__link--button" onClick={onCotizar}>
+              Cotizar
+            </button>
+          ) : (
+            <a href="/#cotizar" className="btn-primary navbar__cta">Cotizar</a>
+          )}
         </nav>
 
         {/* Mobile toggle */}
@@ -78,9 +84,20 @@ export default function Navbar() {
               </a>
             )
           )}
-          <a href="/#cotizar" className="btn-primary" style={{ marginTop: '12px' }} onClick={() => setOpen(false)}>
-            Cotizar
-          </a>
+
+          {onCotizar ? (
+            <button
+              type="button"
+              className="navbar__mobile-link navbar__link--button"
+              onClick={() => { setOpen(false); onCotizar(); }}
+            >
+              Cotizar
+            </button>
+          ) : (
+            <a href="/#cotizar" className="btn-primary" style={{ marginTop: '12px' }} onClick={() => setOpen(false)}>
+              Cotizar
+            </a>
+          )}
         </div>
       )}
     </header>

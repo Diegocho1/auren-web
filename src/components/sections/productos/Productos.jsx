@@ -1,6 +1,6 @@
 import './Productos.css';
 import { useState } from 'react';
-import { IconSearch, IconDrone, IconRadar2, IconGps, IconFocus2, IconChalkboardTeacher } from '@tabler/icons-react'
+//import { IconSearch, IconDrone, IconRadar2, IconGps, IconFocus2, IconChalkboardTeacher } from '@tabler/icons-react'
 import { Link } from 'react-router-dom';
 import { productosArray } from './Productos.js';
 import CotizarModal from '@/components/CotizarModal.jsx';

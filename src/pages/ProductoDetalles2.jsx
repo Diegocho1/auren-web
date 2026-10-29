@@ -1,73 +1,80 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { productosArray } from '@/components/sections/productos/Productos.js';
+import Navbar from '@/components/Navbar';
+import CotizarModal from '@/components/CotizarModal.jsx';
 import './ProductoDetalles2.css';
+import Breadcrumbs from '../components/breadcrumbs/Breadcrumbs'
 
-const COLORS = [
-  {
-    name: 'black',
-    primary: '#000',
-    secondary: '#212121',
-    pic: 'https://github.com/anuzbvbmaniac/Responsive-Product-Card---CSS-ONLY/blob/master/assets/img/jordan_proto.png?raw=true',
-  },
-  {
-    name: 'red',
-    primary: '#7E021C',
-    secondary: '#bd072d',
-    pic: 'https://github.com/anuzbvbmaniac/Responsive-Product-Card---CSS-ONLY/blob/master/assets/img/jordan_proto_red_black.png?raw=true',
-  },
-  {
-    name: 'orange',
-    primary: '#CE5B39',
-    secondary: '#F18557',
-    pic: 'https://github.com/anuzbvbmaniac/Responsive-Product-Card---CSS-ONLY/blob/master/assets/img/jordan_proto_orange_black.png?raw=true',
-  },
-];
 
 export default function ProductoDetalles2() {
-  const [selected, setSelected] = useState(COLORS[0]);
+  const { slug } = useParams();
+  const producto = productosArray.find((p) => p.slug === slug);
+
+  const [srcSeleccionada, setSrcSeleccionada] = useState(null);
+  const [cotizarAbierto, setCotizarAbierto] = useState(false);
+
+  if (!producto) return <p>Producto no encontrado</p>;
+
+  // Si el producto aún no tiene `imagenes`, se usa su `imagen` única.
+  const vistas = producto.imagenes ?? [{ src: producto.imagen }];
+  // Si cambias de producto, la src guardada ya no existe y cae a la primera vista.
+  const actual = vistas.find((v) => v.src === srcSeleccionada) ?? vistas[0];
+
+  //Boton cotizar de navbar diferente
+  const [modalAbierto, setModalAbierto] = useState(false);
+
+  //Breadcrumbs
 
   return (
-    <div style={{ background: selected.primary, minHeight: '100vh' }}>
-      <div className="container">
-        <div className="imgBx" style={{ background: selected.secondary }}>
-          <img src={selected.pic} alt="Jordan Proto-Lyte" />
-        </div>
+    <>
+      <Navbar onCotizar={() => setModalAbierto(true)} />
+      
+      <div className="page_pd">
+        <div className="container_pd">
+          <div className="imgBx" data-marca={producto.clave ?? producto.categoria}>
+            <img src={actual.src} alt={actual.label ?? producto.nombre} />
 
-        <div className="details">
-          <div className="content">
-            <h2 style={{ color: selected.secondary }}>
-              Jordan Proto-Lyte <br />
-              <span>Running Collection</span>
-            </h2>
+            {vistas.length > 1 && (
+              <div className="thumbs">
+                {vistas.map((v, i) => (
+                  <button
+                    key={v.src}
+                    type="button"
+                    className={`thumbs__btn ${v === actual ? 'thumbs__btn--active' : ''}`}
+                    onClick={() => setSrcSeleccionada(v.src)}
+                    aria-label={v.label ?? `Vista ${i + 1}`}
+                    aria-pressed={v === actual}
+                  >
+                    <img src={v.src} alt="" />
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
 
-            <p>
-              Featuring soft foam cushioning and lightweight, woven fabric in the
-              upper, the Jordan Proto-Lyte is made for all-day, bouncy comfort.
-              {/* ...rest of the description */}
-            </p>
+          <div className="details">
+            <div className="content">
+              <h2>
+                {producto.nombre} <br />
+                <span>{producto.categoria}</span>
+              </h2>
 
-            <p className="product-colors">
-              Available Colors:
-              {COLORS.map((c) => (
-                <span
-                  key={c.name}
-                  className={`${c.name} ${c === selected ? 'active' : ''}`}
-                  style={c === selected ? { borderColor: selected.secondary } : undefined}
-                  onClick={() => setSelected(c)}
-                />
-              ))}
-            </p>
+              <p>{producto.descripcion}</p>
 
-            <h3 style={{ color: selected.secondary }}>Rs. 12,800</h3>
-            <button style={{ background: selected.secondary }}>Buy Now</button>
+              <button type="button" onClick={() => setCotizarAbierto(true)}>
+                Cotizar
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      <footer>
-        <a href="https://stylustechnepal.com" target="_blank" rel="noreferrer">
-          anuzbvbmaniac123@gmail.com
-        </a>
-      </footer>
-    </div>
+      <CotizarModal
+        abierto={modalAbierto}
+        producto={cotizarAbierto ? producto : null}
+        onClose={() => setCotizarAbierto(false)}
+      />
+    </>
   );
 }
