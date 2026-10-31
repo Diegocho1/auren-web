@@ -1,9 +1,7 @@
 .breadcrumbs {
-  width: 100%;
-  max-width: 1400px;      /* use the same max-width as .container_pd */
-  margin: 0 auto;
-  padding: 1.25rem 2rem 0; /* use the same side padding as .container_pd */
-  box-sizing: border-box;
+    width: var(--pd-width, min(1300px, 92%));
+    margin: 1.25rem auto 0;
+    padding: 0;
 }
 
 .breadcrumbs__list {

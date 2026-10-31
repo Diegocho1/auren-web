@@ -21,16 +21,20 @@ export default function ProductoDetalles2() {
   // Si cambias de producto, la src guardada ya no existe y cae a la primera vista.
   const actual = vistas.find((v) => v.src === srcSeleccionada) ?? vistas[0];
 
-  //Boton cotizar de navbar diferente
-  const [modalAbierto, setModalAbierto] = useState(false);
-
-  //Breadcrumbs
 
   return (
     <>
-      <Navbar onCotizar={() => setModalAbierto(true)} />
-      
+      <Navbar onCotizar={() => setCotizarAbierto(true)} />
+
       <div className="page_pd">
+        <Breadcrumbs
+          items={[
+            { label: "Inicio", to: "/" },
+            { label: "Productos", to: "/productos" },
+            { label: producto.nombre },
+          ]}
+        />
+
         <div className="container_pd">
           <div className="imgBx" data-marca={producto.clave ?? producto.categoria}>
             <img src={actual.src} alt={actual.label ?? producto.nombre} />
@@ -55,14 +59,28 @@ export default function ProductoDetalles2() {
 
           <div className="details">
             <div className="content">
-              <h2>
-                {producto.nombre} <br />
-                <span>{producto.categoria}</span>
-              </h2>
+              <span className="details__eyebrow">{producto.categoria}</span>
 
-              <p>{producto.descripcion}</p>
+              <h2 className="details__title">{producto.nombre}</h2>
 
-              <button type="button" onClick={() => setCotizarAbierto(true)}>
+              <p className="details__lead">{producto.descripcion}</p>
+
+              {producto.especificaciones?.length > 0 && (
+                <dl className="details__specs">
+                  {producto.especificaciones.map((esp) => (
+                    <div className="details__spec" key={esp.etiqueta}>
+                      <dt className="details__spec-value">{esp.valor}</dt>
+                      <dd className="details__spec-label">{esp.etiqueta}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
+
+              <button
+                type="button"
+                className="details__cta"
+                onClick={() => setCotizarAbierto(true)}
+              >
                 Cotizar
               </button>
             </div>
@@ -71,7 +89,7 @@ export default function ProductoDetalles2() {
       </div>
 
       <CotizarModal
-        abierto={modalAbierto}
+        abierto={cotizarAbierto}
         producto={cotizarAbierto ? producto : null}
         onClose={() => setCotizarAbierto(false)}
       />

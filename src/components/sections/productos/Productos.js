@@ -65,11 +65,9 @@ export const productosArray = [
     nombre: "Matrice 400 + ZENMUSE L3",
     clave: "DJI",
     categoria: "Drones",
-    descripcion: "Plataforma aérea empresarial con sensor LiDAR para levantamientos topográficos de alta precisión." +
-      " El Matrice 400 ofrece hasta 59 min de vuelo (según la carga útil), 6 kg de capacidad de carga, protección IP55 y " +
-      "detección de obstáculos con LiDAR rotativo y radar mmWave. La Zenmuse L3 integra LiDAR de largo alcance (hasta 400 m) y " +
-      "doble cámara RGB de 100 MP con obturador mecánico. Precisión de nube de puntos de 3 cm vertical y 4 cm horizontal a 120 m " +
-      "de altura.",
+    descripcion:
+      "Plataforma aérea empresarial con sensor LiDAR para levantamientos topográficos de alta precisión" +
+      "Incluye detección de obstáculos con LiDAR rotativo y radar mmWave, y la Zenmuse L3 con LiDAR de largo alcance y doble cámara RGB con obturador mecánico.",
     imagen: M4_L3,
     imagenes: [
       { src: M4_L3, label: "Vista frontal" },
@@ -82,11 +80,19 @@ export const productosArray = [
       { src: M4_L3_8, label: "Vista lateral" },
       { src: M4_L3_9, label: "Vista lateral" },
     ],
+    especificaciones: [
+      { valor: "59 min", etiqueta: "Tiempo de vuelo" },
+      { valor: "6 kg", etiqueta: "Capacidad de carga" },
+      { valor: "IP55", etiqueta: "Protección" },
+      { valor: "400 m", etiqueta: "Alcance LiDAR" },
+      { valor: "100 MP", etiqueta: "Doble cámara RGB" },
+      { valor: "3 / 4 cm", etiqueta: "Precisión V / H a 120 m" },
+    ],
   },
   {
     slug: "slt-12",
     nombre: "SLT 12",
-    clave: "SLT",
+    clave: "SLT 12",
     categoria: "Estaciones",
     descripcion: "Estación total Android con doble pantalla táctil (5.5'') y cámara integrada de 8 MP. " +
       "Replanteo visual guiado por imagen y replanteo CAD en un clic, con software ST-Surv. Medición sin prisma hasta 1,000 m y " +
@@ -104,7 +110,7 @@ export const productosArray = [
   {
     slug: "slt-10",
     nombre: "SLT 10",
-    clave: "SLT",
+    clave: "SLT 10",
     categoria: "Estaciones",
     descripcion: "Estación total de largo alcance con pantalla a color de alto brillo (2.8''), legible bajo sol intenso. " +
       "Alcance sin prisma de hasta 1,000 m y con prisma de hasta 5,000 m (6,000 m con prismas combinados). " +
